@@ -1,0 +1,39 @@
+buildscript{
+	// build.gradle에서 사용하는 전역변수 설정
+	ext {
+		springBootVersion = '2.1.7.RELEASE'
+	}
+
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+
+	dependencies {
+		// spring-boot-gradle-plugin 이라는 스프링 부트 그레들 플러그인의 2.1.7.RELEASE 를 의존성으로 받는다.
+		// 각 라이브러리들의 버전 관리가 한 곳에 집중되고 버전 충돌 문제도 해결된다.
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+//특정 버전을 명시하면 안된다. 버전을 명시하지 않아야만 맨위에 작성한 '${springBootVersion}'의 버전을 따라가게 된다.
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+// 스프링 부트의 의존성들을 관리해주는 플러그인
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+// 각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을지를 정한다.
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
